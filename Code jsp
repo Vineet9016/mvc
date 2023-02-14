@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  <form action="processSelection.jsp" method="post"> -->
+	<form action="dropdown.jsp" method="post">
+		<label for="country">Select a Country:</label> 
+		<select name="countryn"	id="countryi">
+            <% 
+                ArrayList<String> countryList = new ArrayList<String>();
+                countryList.add("USA");
+                countryList.add("Canada");
+                countryList.add("Mexico");
+                countryList.add("Brazil");
+                countryList.add("Argentina");
+
+                for (String country : countryList) {
+                    out.println("<option value='" + country + "'>" + country + "</option>");
+                }
+            %>
+		</select> 
+		<br> <input type="submit" value="Submit">
+	</form>
+	<%
+	String country = request.getParameter("countryn");
+	out.println("You selected " + country + ".");
+	%>
+</body>
+</html>
