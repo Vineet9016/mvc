@@ -4,3 +4,53 @@ https://stackoverflow.com/questions/35836190/how-to-get-the-selected-value-of-se
 
 
 https://mkyong.com/javascript/javascript-get-selected-value-from-dropdown-list/
+
+
+
+
+
+--------
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  <form action="processSelection.jsp" method="post"> -->
+    <form action="<%=request.getContextPath()%>/dropdown2.jsp" method="post">
+        <label for="country">Select a Country:</label>
+        <select name="country" id="country" onchange="this.form.submit()">
+            <% 
+                ArrayList<String> countryList = new ArrayList<String>();
+                countryList.add("USA");
+                countryList.add("Canada");
+                countryList.add("Mexico");
+                countryList.add("Brazil");
+                countryList.add("Argentina");
+
+                String selectedCountry = request.getParameter("country");
+                for (String country : countryList) {
+                    if (country.equals(selectedCountry)) {
+                        out.println("<option value='" + country + "' selected>" + country + "</option>");
+                    } else {
+                        out.println("<option value='" + country + "'>" + country + "</option>");
+                    }
+                }
+            %>
+        </select>
+        <br>
+        <% 
+            if (selectedCountry != null) {
+                out.println("You selected " + selectedCountry + ".");
+            }
+        %>
+    </form>
+
+
+</body>
+</html>
